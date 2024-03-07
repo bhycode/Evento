@@ -12,7 +12,6 @@ use Illuminate\Http\Request;
 class RegisterController extends Controller
 {
 
-    protected $redirectTo = RouteServiceProvider::HOME;
 
     public function __construct()
     {
@@ -46,7 +45,7 @@ class RegisterController extends Controller
 
     protected function redirectPath()
     {
-        return '/';
+        return '/login';
     }
 
     protected function register(Request $request)
