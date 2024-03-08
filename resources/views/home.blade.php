@@ -70,7 +70,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="home">Home</a>
+                <a class="nav-link" href="{{ route('home') }}">Home</a>
             </li>
 
             @auth
@@ -80,7 +80,7 @@
                     </li>
                 @elseif(auth()->user()->role == 2)
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('home') }}">Organizer Dashboard</a>
+                        <a class="nav-link" href="{{ route('organizer.dashboard') }}">Organizer Dashboard</a>
                     </li>
                 @elseif(auth()->user()->role == 3)
                     <li class="nav-item">

@@ -5,6 +5,8 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\OrganizerController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -41,4 +43,24 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
     Route::get('/event-categories/{eventCategory}/edit', [AdminController::class, 'eventCategoriesEdit'])->name('event-categories.edit');
     Route::put('/event-categories/{eventCategory}/update', [AdminController::class, 'eventCategoriesUpdate'])->name('event-categories.update');
     Route::delete('/event-categories/{eventCategory}/destroy', [AdminController::class, 'eventCategoriesDestroy'])->name('event-categories.destroy');
+});
+
+
+
+Route::middleware(['auth', 'organizer'])->group(function () {
+    Route::get('/organizer/dashboard', [OrganizerController::class, 'dashboard'])->name('organizer.dashboard');
+
+});
+
+
+
+Route::middleware(['auth', 'organizer'])->group(function () {
+    Route::get('/organizer/dashboard', [OrganizerController::class, 'dashboard'])->name('organizer.dashboard');
+
+    Route::get('/organizer/events', [OrganizerController::class, 'index'])->name('organizer.events.index');
+    Route::get('/organizer/events/create', [OrganizerController::class, 'create'])->name('organizer.events.create');
+    Route::post('/organizer/events/store', [OrganizerController::class, 'store'])->name('organizer.events.store');
+    Route::get('/organizer/events/{event}/edit', [OrganizerController::class, 'edit'])->name('organizer.events.edit');
+    Route::put('/organizer/events/{event}/update', [OrganizerController::class, 'update'])->name('organizer.events.update');
+    Route::delete('/organizer/events/{event}/destroy', [OrganizerController::class, 'destroy'])->name('organizer.events.destroy');
 });
