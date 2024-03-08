@@ -7,6 +7,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrganizerController;
 
+use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\ResetPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,3 +66,11 @@ Route::middleware(['auth', 'organizer'])->group(function () {
     Route::put('/organizer/events/{event}/update', [OrganizerController::class, 'update'])->name('organizer.events.update');
     Route::delete('/organizer/events/{event}/destroy', [OrganizerController::class, 'destroy'])->name('organizer.events.destroy');
 });
+
+
+
+
+Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
